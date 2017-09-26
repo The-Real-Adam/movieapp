@@ -8,6 +8,9 @@ exports.seed = function(knex, Promise) {
         {id: 1, title: 'Jurrasic Park', year:1993, director_id:1},
         {id: 2, title: 'Pulp Fiction', year:1994, director_id:2},
         {id: 3, title: 'The Titanic', year:1997, director_id:3}
-      ]);
+      ])
+      .then(() =>{
+        return knex.raw("SELECT setval('movie_id_seq',(SELECT MAX(id) FROM movie));")
+      })
     });
 };
